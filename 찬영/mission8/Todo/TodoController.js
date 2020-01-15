@@ -20,7 +20,7 @@ class TodoController {
         this.todoModel.commandUpdate(commandList[1], commandList[2]);
         break;
       case 'delete':
-        console.log('delete');
+        this.todoModel.commandDelete(commandList[1]);
         break;
       default:
         console.error('올바르지 않은 명령어입니다');
