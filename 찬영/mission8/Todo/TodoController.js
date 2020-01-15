@@ -1,4 +1,6 @@
 class TodoController {
+  constructor() {}
+
   splitCommand(command) {
     const commandList = command.split('$$');
     return commandList;
@@ -45,5 +47,4 @@ class TodoController {
   }
 }
 
-const controller = new TodoController();
-controller.runTodo();
+module.exports = TodoController;
