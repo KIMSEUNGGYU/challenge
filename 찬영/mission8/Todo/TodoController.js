@@ -1,4 +1,9 @@
 class TodoController {
+  splitCommand(command) {
+    const commandList = command.split('$$');
+    return commandList;
+  }
+
   runTodo() {
     const readline = require('readline');
     const rl = readline.createInterface({
@@ -12,6 +17,7 @@ class TodoController {
       if (command === 'q') {
         rl.close();
       }
+      const commandList = this.splitCommand(command);
       rl.prompt();
     });
     rl.on('close', () => process.exit());
