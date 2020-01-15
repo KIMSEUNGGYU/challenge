@@ -63,6 +63,7 @@ TodoModel.prototype.printStatus = function() {
     );
   }, '현재상태 : ');
   console.log(output);
+  this.update();
 };
 
 TodoModel.prototype.printTodoList = function(listName) {
