@@ -2,6 +2,14 @@ const TodoModel = function(todolist) {
   this.todolist = todolist;
 };
 
+TodoModel.prototype.commandShow = function(showContents) {
+  if (showContents === 'current') {
+    this.printStatus();
+  } else if (showContents === 'todo' || showContents === 'doing' || showContents === 'done') {
+    this.printTodoList(showContents);
+  }
+};
+
 TodoModel.prototype.commandAdd = function(addContents, addTag) {
   const makeId = util.createUniqueId();
   this.todolist.push({
@@ -11,6 +19,7 @@ TodoModel.prototype.commandAdd = function(addContents, addTag) {
     tag: util.getTag(addTag),
   });
   console.log(`${addContents}가 추가됐습니다. (id : ${makeId})`);
+  this.printStatus();
 };
 
 TodoModel.prototype.commandUpdate = function(updateId, updateStatus) {
@@ -20,6 +29,7 @@ TodoModel.prototype.commandUpdate = function(updateId, updateStatus) {
       console.log(`${data.contents}가 ${updateStatus}으로 상태가 변경됐습니다`);
     }
   });
+  this.printStatus();
 };
 
 TodoModel.prototype.commandDelete = function(updateId) {
@@ -29,6 +39,40 @@ TodoModel.prototype.commandDelete = function(updateId) {
       console.log(`${data.contents}가 ${data.status}목록에서 삭제됐습니다`);
     }
   });
+  this.printStatus();
+};
+
+TodoModel.prototype.printStatus = function() {
+  const statusList = ['todo', 'doing', 'done'];
+  const idList = statusList.map((status, index) => {
+    const list = [];
+    this.todolist.forEach(data => {
+      if (statusList[index] === data.status) {
+        list.push(data.id);
+      }
+    });
+    return list;
+  });
+
+  const output = idList.reduce((outputMessage, id, index) => {
+    return (
+      outputMessage + `${statusList[index]}: [${id}]${index !== idList.length - 1 ? ', ' : '\n'}`
+    );
+  }, '현재상태 : ');
+  console.log(output);
+};
+
+TodoModel.prototype.printTodoList = function(listName) {
+  const list = [];
+  this.todolist.forEach(data => {
+    if (data.status === listName) {
+      list.push([data.id, data.contents]);
+    }
+  });
+  const output = list.reduce((outputMessage, data, index) => {
+    return outputMessage + `'${data[1]}, ${data[0]}번'${index !== list.length - 1 ? ', ' : '\n'}`;
+  }, `${listName}리스트 : 총${list.length}건 : `);
+  console.log(output);
 };
 
 module.exports = TodoModel;
