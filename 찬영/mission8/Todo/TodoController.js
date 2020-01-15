@@ -1,5 +1,7 @@
 class TodoController {
-  constructor() {}
+  constructor(todoModel) {
+    this.todoModel = todoModel;
+  }
 
   splitCommand(command) {
     const commandList = command.split('$$');
