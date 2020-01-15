@@ -5,7 +5,6 @@ const TodoController = require('./TodoController.js');
 
 const todolist = JSON.parse(request('GET', 'http://localhost:8090/get_data').getBody('utf-8'));
 
-const todoModel = new TodoModel(todolist);
+const todoModel = new TodoModel(todolist.data);
 const controller = new TodoController(todoModel);
-//controller.runTodo();
-console.log(todolist);
+controller.runTodo();
