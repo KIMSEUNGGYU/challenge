@@ -2,6 +2,12 @@
 const RANGE_ID = 10000;
 const EXTRACT_REG = /['" \[\]]/g;
 
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
 // #todo 데이터 보관 객체
 const todoData = {
   todo: [
@@ -17,13 +23,6 @@ const todoData = {
 
 // #명령어 입력 함수 (main)
 function inputCommand() {
-  const readline = require('readline');
-
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
   rl.question('명령하세요 : ', command => {
     const commandList = splitCommand(command);
     selectAction(commandList);
@@ -65,7 +64,7 @@ function selectAction(commandList) {
 
 // #ID 생성 함수
 function createId() {
-  while (1) {
+  while (true) {
     const makeRandomNumber = Math.floor(Math.random() * RANGE_ID);
     if (isUnique(makeRandomNumber)) {
       return makeRandomNumber;
