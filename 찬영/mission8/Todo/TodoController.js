@@ -11,7 +11,7 @@ class TodoController {
   selectAction(commandList) {
     switch (commandList[0]) {
       case 'show':
-        console.log('show');
+        this.todoModel.commandShow(commandList[1]);
         break;
       case 'add':
         this.todoModel.commandAdd(commandList[1], commandList[2]);
