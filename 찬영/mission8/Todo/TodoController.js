@@ -14,7 +14,7 @@ class TodoController {
         console.log('show');
         break;
       case 'add':
-        console.log('add');
+        this.todoModel.commandAdd(commandList[1], commandList[2]);
         break;
       case 'update':
         console.log('update');
