@@ -5,3 +5,5 @@ util = {
     return uuidv1();
   },
 };
+
+module.exports = util;
