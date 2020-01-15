@@ -3,8 +3,8 @@ const TodoModel = require('./TodoModel.js');
 const TodoController = require('./TodoController.js');
 
 // 임시 데이터 값
-const todolist = {};
+const todolist = [];
 
 const todoModel = new TodoModel(todolist);
-const controller = new TodoController();
+const controller = new TodoController(todoModel);
 controller.runTodo();
