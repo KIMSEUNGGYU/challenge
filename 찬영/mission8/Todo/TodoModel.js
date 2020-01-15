@@ -1,6 +1,9 @@
+const Observer = require('./Observable.js');
 const TodoModel = function(todolist) {
   this.todolist = todolist;
 };
+
+TodoModel.prototype = new Observer();
 
 TodoModel.prototype.commandShow = function(showContents) {
   if (showContents === 'current') {
