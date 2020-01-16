@@ -1,5 +1,4 @@
 function problem2(inputNumber) {
-  //최대공약수 유클리드호제법을 이용해 풀어보기
   inputNumber[0] = Math.abs(inputNumber[0]);
   inputNumber[1] = Math.abs(inputNumber[1]);
 
@@ -9,6 +8,7 @@ function problem2(inputNumber) {
 }
 
 function swap(inputNumber) {
+  //input으로 입력받을시 return으로 반환해주지 않아도 된다.
   if (inputNumber[0] < inputNumber[1]) {
     [inputNumber[0], inputNumber[1]] = [inputNumber[1], inputNumber[0]];
   }
@@ -27,4 +27,4 @@ function uclid(inputNumber) {
 //problem2([2, 4]);
 //problem2([15, 12]);
 //problem2([30, 45]);
-//problem2([57, 15]);
+problem2([57, 15]);
