@@ -1,9 +1,11 @@
+// #html파일 생성 class
 class TodoHtmlView {
   constructor(todoModel) {
     this.todoModel = todoModel;
     this.todoModel.createView = this.createView;
   }
 
+  // #html파일 생성 메소드
   createView(printStatus) {
     const fs = require('fs');
     const htmlContents = `<!DOCTYPE html>

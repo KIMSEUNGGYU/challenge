@@ -1,3 +1,4 @@
+// #명령어 실행 class
 const Observer = require('./Observable.js');
 const TodoModel = function(todolist) {
   this.todolist = todolist;
@@ -6,6 +7,7 @@ const TodoModel = function(todolist) {
 
 TodoModel.prototype = new Observer();
 
+// #show명령어 실행 메소드
 TodoModel.prototype.commandShow = function(showContents) {
   if (showContents === 'current') {
     this.printStatus();
@@ -16,6 +18,7 @@ TodoModel.prototype.commandShow = function(showContents) {
   }
 };
 
+// #add명령어 실행 메소드
 TodoModel.prototype.commandAdd = function(addContents, addTag) {
   const makeId = util.createUniqueId();
   this.todolist.push({
@@ -28,6 +31,7 @@ TodoModel.prototype.commandAdd = function(addContents, addTag) {
   this.printStatus();
 };
 
+// #update명령어 실행 메소드
 TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve, reject) {
   let statusCheck = false;
   this.todolist.forEach((data, index) => {
@@ -46,6 +50,7 @@ TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve, re
   }
 };
 
+// #delete명령어 실행 메소드
 TodoModel.prototype.commandDelete = function(deleteId) {
   let statusCheck = false;
   this.todolist.forEach((data, index) => {
@@ -61,6 +66,7 @@ TodoModel.prototype.commandDelete = function(deleteId) {
   this.printStatus();
 };
 
+// #상태 출력 메소드
 TodoModel.prototype.printStatus = function() {
   const statusList = ['todo', 'doing', 'done'];
   const idList = statusList.map((status, index) => {
@@ -82,6 +88,7 @@ TodoModel.prototype.printStatus = function() {
   this.update(output);
 };
 
+// #리스트 출력 메소드
 TodoModel.prototype.printTodoList = function(listName) {
   const list = [];
   this.todolist.forEach(data => {

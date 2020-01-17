@@ -1,3 +1,4 @@
+// #todolist json 데이터 저장 파일
 todolist = {
   data: [
     { id: '1234', status: 'todo', contents: 'test1', tag: ['test1, test2'] },

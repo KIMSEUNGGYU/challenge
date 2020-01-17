@@ -1,13 +1,16 @@
+// #명령어 컨트롤러 class
 class TodoController {
   constructor(todoModel) {
     this.todoModel = todoModel;
   }
 
+  // #명령어 분할 메소드
   splitCommand(command) {
     const commandList = command.split('$$');
     return commandList;
   }
 
+  // #첫번째 명령어 기준 메소드 선택 메소드
   selectAction(commandList) {
     try {
       switch (commandList[0]) {
@@ -36,6 +39,7 @@ class TodoController {
     return new Promise(resolve => resolve());
   }
 
+  // #명령어 입력 메소드
   runTodo() {
     const readline = require('readline');
     const rl = readline.createInterface({
