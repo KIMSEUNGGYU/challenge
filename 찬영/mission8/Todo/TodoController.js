@@ -18,8 +18,10 @@ class TodoController {
           this.todoModel.commandAdd(commandList[1], commandList[2]);
           break;
         case 'update':
-          return new Promise(resolve => {
-            this.todoModel.commandUpdate(commandList[1], commandList[2], resolve);
+          return new Promise((resolve, reject) => {
+            this.todoModel.commandUpdate(commandList[1], commandList[2], resolve, reject);
+          }).then(null, error => {
+            console.error(`${error.message}\n`);
           });
         case 'delete':
           this.todoModel.commandDelete(commandList[1]);
