@@ -8,5 +8,5 @@ const todolist = JSON.parse(request('GET', 'http://localhost:8090/get_data').get
 
 const todoModel = new TodoModel(todolist.data);
 const controller = new TodoController(todoModel);
-new TodoHtmlView(todoModel);
 controller.runTodo();
+new TodoHtmlView(todoModel);
