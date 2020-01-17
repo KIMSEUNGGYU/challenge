@@ -25,14 +25,17 @@ TodoModel.prototype.commandAdd = function(addContents, addTag) {
   this.printStatus();
 };
 
-TodoModel.prototype.commandUpdate = function(updateId, updateStatus) {
+TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve) {
   this.todolist.forEach((data, index) => {
     if (data.id === updateId) {
       this.todolist[index].status = updateStatus;
-      console.log(`${data.contents}가 ${updateStatus}으로 상태가 변경됐습니다`);
+      setTimeout(() => {
+        console.log(`${data.contents}가 ${updateStatus}으로 상태가 변경됐습니다`);
+        this.printStatus();
+        resolve();
+      }, 3000);
     }
   });
-  this.printStatus();
 };
 
 TodoModel.prototype.commandDelete = function(updateId) {

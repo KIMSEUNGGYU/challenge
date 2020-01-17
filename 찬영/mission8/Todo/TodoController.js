@@ -17,8 +17,9 @@ class TodoController {
         this.todoModel.commandAdd(commandList[1], commandList[2]);
         break;
       case 'update':
-        this.todoModel.commandUpdate(commandList[1], commandList[2]);
-        break;
+        return new Promise(resolve => {
+          this.todoModel.commandUpdate(commandList[1], commandList[2], resolve);
+        });
       case 'delete':
         this.todoModel.commandDelete(commandList[1]);
         break;
@@ -26,6 +27,7 @@ class TodoController {
         console.error('올바르지 않은 명령어입니다');
         break;
     }
+    return new Promise(resolve => resolve());
   }
 
   runTodo() {
@@ -37,12 +39,12 @@ class TodoController {
 
     rl.setPrompt('명령하세요 : ');
     rl.prompt();
-    rl.on('line', command => {
+    rl.on('line', async command => {
       if (command === 'q') {
         rl.close();
       }
       const commandList = this.splitCommand(command);
-      this.selectAction(commandList);
+      await this.selectAction(commandList);
       rl.prompt();
     });
     rl.on('close', () => process.exit());
