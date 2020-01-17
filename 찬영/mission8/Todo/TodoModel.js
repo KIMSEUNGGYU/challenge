@@ -11,6 +11,8 @@ TodoModel.prototype.commandShow = function(showContents) {
     this.printStatus();
   } else if (showContents === 'todo' || showContents === 'doing' || showContents === 'done') {
     this.printTodoList(showContents);
+  } else {
+    throw Error('show 명령어 입력값 에러');
   }
 };
 
@@ -26,9 +28,11 @@ TodoModel.prototype.commandAdd = function(addContents, addTag) {
   this.printStatus();
 };
 
-TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve) {
+TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve, reject) {
+  let statusCheck = false;
   this.todolist.forEach((data, index) => {
     if (data.id === updateId) {
+      statusCheck = true;
       this.todolist[index].status = updateStatus;
       setTimeout(() => {
         console.log(`${data.contents}가 ${updateStatus}으로 상태가 변경됐습니다`);
@@ -37,15 +41,23 @@ TodoModel.prototype.commandUpdate = function(updateId, updateStatus, resolve) {
       }, 3000);
     }
   });
+  if (!statusCheck) {
+    reject(Error('update 명령어 입력값 에러 : 입력한 아이디나 상태가 존재하지 않음'));
+  }
 };
 
-TodoModel.prototype.commandDelete = function(updateId) {
+TodoModel.prototype.commandDelete = function(deleteId) {
+  let statusCheck = false;
   this.todolist.forEach((data, index) => {
-    if (data.id === updateId) {
+    if (data.id === deleteId) {
+      statusCheck = true;
       this.todolist.splice(index, 1);
       console.log(`${data.contents}가 ${data.status}목록에서 삭제됐습니다`);
     }
   });
+  if (!statusCheck) {
+    throw Error('delete 명령어 입력값 에러 : 입력한 아이디가 존재하지 않음');
+  }
   this.printStatus();
 };
 
