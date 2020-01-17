@@ -81,6 +81,7 @@ TodoModel.prototype.printTodoList = function(listName) {
     return outputMessage + `'${data[1]}, ${data[0]}번'${index !== list.length - 1 ? ', ' : '\n'}`;
   }, `${listName}리스트 : 총${list.length}건 : `);
   console.log(output);
+  this.update(output);
 };
 
 module.exports = TodoModel;
