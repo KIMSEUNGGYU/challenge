@@ -1,6 +1,10 @@
 class Observer {
-  update() {
-    console.log(this.todolist);
+  constructor() {
+    this.data;
+  }
+  update(printMessage) {
+    this.data = printMessage;
+    this.createView(this.data);
   }
 }
 
