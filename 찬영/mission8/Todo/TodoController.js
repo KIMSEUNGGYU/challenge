@@ -9,23 +9,27 @@ class TodoController {
   }
 
   selectAction(commandList) {
-    switch (commandList[0]) {
-      case 'show':
-        this.todoModel.commandShow(commandList[1]);
-        break;
-      case 'add':
-        this.todoModel.commandAdd(commandList[1], commandList[2]);
-        break;
-      case 'update':
-        return new Promise(resolve => {
-          this.todoModel.commandUpdate(commandList[1], commandList[2], resolve);
-        });
-      case 'delete':
-        this.todoModel.commandDelete(commandList[1]);
-        break;
-      default:
-        console.error('올바르지 않은 명령어입니다');
-        break;
+    try {
+      switch (commandList[0]) {
+        case 'show':
+          this.todoModel.commandShow(commandList[1]);
+          break;
+        case 'add':
+          this.todoModel.commandAdd(commandList[1], commandList[2]);
+          break;
+        case 'update':
+          return new Promise(resolve => {
+            this.todoModel.commandUpdate(commandList[1], commandList[2], resolve);
+          });
+        case 'delete':
+          this.todoModel.commandDelete(commandList[1]);
+          break;
+        default:
+          throw Error('올바르지 않은 명령어입니다');
+          break;
+      }
+    } catch (error) {
+      console.error(`${error.message}\n`);
     }
     return new Promise(resolve => resolve());
   }
