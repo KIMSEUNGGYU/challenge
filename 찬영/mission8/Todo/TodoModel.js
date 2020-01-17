@@ -1,6 +1,7 @@
 const Observer = require('./Observable.js');
 const TodoModel = function(todolist) {
   this.todolist = todolist;
+  this.createView;
 };
 
 TodoModel.prototype = new Observer();
@@ -66,7 +67,7 @@ TodoModel.prototype.printStatus = function() {
     );
   }, '현재상태 : ');
   console.log(output);
-  this.update();
+  this.update(output);
 };
 
 TodoModel.prototype.printTodoList = function(listName) {
